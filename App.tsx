@@ -38,14 +38,19 @@ const App: React.FC = () => {
     }
   }, [users, progress]);
 
-  const handleAddUser = (name: string, grade: Grade) => {
-    const newUser: User = { id: Date.now().toString(), name, grade };
+  const handleAddUser = (name: string, grade: Grade, interest: string, difficultyLevel: number, storyMode: boolean, dyslexiaFont: boolean = false) => {
+    const newUser: User = { id: Date.now().toString(), name, grade, interest, difficultyLevel, storyMode, dyslexiaFont };
     setUsers(prev => [...prev, newUser]);
     setProgress(prev => ({
       ...prev,
       [newUser.id]: { math: 0, english: 0, hebrew: 0 }
     }));
     setCurrentUser(newUser);
+  };
+
+  const handleUpdateUser = (updatedUser: User) => {
+    setUsers(prev => prev.map(u => u.id === updatedUser.id ? updatedUser : u));
+    setCurrentUser(updatedUser);
   };
 
   const handleSelectUser = (userId: string) => {
@@ -100,6 +105,7 @@ const App: React.FC = () => {
           onBack={handleBackToDashboard}
           onSessionComplete={handleSessionComplete}
           initialProgress={progress[currentUser.id]?.[currentSubject] ?? 0}
+          onUpdateUser={handleUpdateUser}
         />
       );
     }
@@ -110,12 +116,13 @@ const App: React.FC = () => {
         onSelectSubject={handleSelectSubject}
         progress={progress[currentUser.id] || { math: 0, english: 0, hebrew: 0 }}
         onLogout={handleLogout}
+        onUpdateUser={handleUpdateUser}
       />
     );
   };
 
   return (
-    <div className="bg-slate-50 min-h-screen flex items-center justify-center p-4">
+    <div className={`bg-slate-50 min-h-screen flex items-center justify-center p-4 ${currentUser?.dyslexiaFont ? 'font-lexend' : 'font-sans'}`}>
       <main className="container mx-auto">
         {renderContent()}
       </main>

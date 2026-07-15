@@ -15,29 +15,39 @@ interface MathCategorySelectionProps {
 
 const categoriesByGrade: Record<number, { cat: MathCategory, title: string, desc: string, icon: React.ReactNode, color: 'blue' | 'green' | 'purple' }[]> = {
   1: [
+    { cat: 'social_scripting', title: 'Social Scripting', desc: 'Social stories with a math twist.', icon: <AdditionIcon />, color: 'purple' },
     { cat: 'counting', title: 'Counting', desc: 'Let\'s count some fun objects!', icon: <AdditionIcon />, color: 'blue' },
-    { cat: 'addition', title: 'Addition', desc: 'Putting numbers together.', icon: <AdditionIcon />, color: 'green' },
-    { cat: 'subtraction', title: 'Subtraction', desc: 'Taking numbers away.', icon: <SubtractionIcon />, color: 'purple' },
-  ],
-  2: [
+    { cat: 'visual_exercises', title: 'Visual Fun', desc: 'Solve math with pictures!', icon: <AdditionIcon />, color: 'green' },
+    { cat: 'pattern_architect', title: 'Pattern Architect', desc: 'Complete the fun patterns!', icon: <AdditionIcon />, color: 'purple' },
     { cat: 'addition', title: 'Addition', desc: 'Putting numbers together.', icon: <AdditionIcon />, color: 'blue' },
     { cat: 'subtraction', title: 'Subtraction', desc: 'Taking numbers away.', icon: <SubtractionIcon />, color: 'green' },
   ],
+  2: [
+    { cat: 'social_scripting', title: 'Social Scripting', desc: 'Social stories with a math twist.', icon: <AdditionIcon />, color: 'purple' },
+    { cat: 'visual_exercises', title: 'Visual Fun', desc: 'Solve math with pictures!', icon: <AdditionIcon />, color: 'blue' },
+    { cat: 'pattern_architect', title: 'Pattern Architect', desc: 'Complete the fun patterns!', icon: <AdditionIcon />, color: 'green' },
+    { cat: 'addition', title: 'Addition', desc: 'Putting numbers together.', icon: <AdditionIcon />, color: 'purple' },
+    { cat: 'subtraction', title: 'Subtraction', desc: 'Taking numbers away.', icon: <SubtractionIcon />, color: 'blue' },
+  ],
   3: [
+    { cat: 'social_scripting', title: 'Social Scripting', desc: 'Social stories with a math twist.', icon: <AdditionIcon />, color: 'purple' },
     { cat: 'addition', title: 'Addition', desc: 'Getting faster with bigger numbers.', icon: <AdditionIcon />, color: 'blue' },
     { cat: 'subtraction', title: 'Subtraction', desc: 'Solving tricky takeaways.', icon: <SubtractionIcon />, color: 'green' },
     { cat: 'multiplication', title: 'Multiplication', desc: 'Learning about groups.', icon: <MultiplicationIcon />, color: 'purple' },
   ],
   4: [
+    { cat: 'social_scripting', title: 'Social Scripting', desc: 'Social stories with a math twist.', icon: <AdditionIcon />, color: 'purple' },
     { cat: 'multiplication', title: 'Multiplication', desc: 'Mastering the times tables.', icon: <MultiplicationIcon />, color: 'blue' },
     { cat: 'division', title: 'Division', desc: 'Sharing numbers equally.', icon: <DivisionIcon />, color: 'green' },
   ],
   5: [
+    { cat: 'social_scripting', title: 'Social Scripting', desc: 'Social stories with a math twist.', icon: <AdditionIcon />, color: 'purple' },
     { cat: 'multiplication', title: 'Multiplication', desc: 'Working with larger numbers.', icon: <MultiplicationIcon />, color: 'blue' },
     { cat: 'division', title: 'Division', desc: 'Solving division puzzles.', icon: <DivisionIcon />, color: 'green' },
     { cat: 'fractions', title: 'Fractions', desc: 'Understanding parts of a whole.', icon: <FractionsIcon />, color: 'purple' },
   ],
   6: [
+    { cat: 'social_scripting', title: 'Social Scripting', desc: 'Social stories with a math twist.', icon: <AdditionIcon />, color: 'purple' },
     { cat: 'division', title: 'Division', desc: 'Advanced division problems.', icon: <DivisionIcon />, color: 'blue' },
     { cat: 'fractions', title: 'Fractions', desc: 'Adding and subtracting fractions.', icon: <FractionsIcon />, color: 'green' },
   ],

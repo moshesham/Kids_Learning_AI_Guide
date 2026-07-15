@@ -17,6 +17,8 @@ const EnglishCategorySelection: React.FC<EnglishCategorySelectionProps> = ({ use
     { cat: 'reading_practice', title: 'Reading Practice', desc: 'Read a sentence out loud and get feedback.', icon: <MicIcon />, color: 'blue' },
     { cat: 'vocabulary', title: 'Vocabulary', desc: 'Learn new words and their meanings.', icon: <VocabularyIcon />, color: 'green' },
     { cat: 'comprehension', title: 'Reading Comprehension', desc: 'Read a passage and answer questions.', icon: <ComprehensionIcon />, color: 'purple' },
+    { cat: 'visual_syntax', title: 'Visual Syntax', desc: 'Build sentences with color-coded blocks.', icon: <ReadingIcon />, color: 'blue' },
+    { cat: 'social_scripting', title: 'Social Scripting', desc: 'Practice social interactions, conflict resolution, and reading body language.', icon: <MicIcon />, color: 'green' },
   ];
 
   return (
