@@ -34,20 +34,6 @@ jobs:
     - name: Set up Android SDK
       uses: android-actions/setup-android@v3
 
-    - name: Create Capacitor config
-      run: |
-        cat > capacitor.config.ts <<'EOF'
-        import type { CapacitorConfig } from '@capacitor/cli';
-
-        const config: CapacitorConfig = {
-          appId: 'com.kids.learning.ai.guide',
-          appName: 'Kids Learning AI Guide',
-          webDir: 'dist'
-        };
-
-        export default config;
-        EOF
-
     - name: Sync Android project
       run: |
         if [ ! -d android ]; then
