@@ -36,7 +36,9 @@ jobs:
 
     - name: Sync Android project
       run: |
-        npx cap add android --no-interactive
+        if [ ! -d android ]; then
+          npx cap add android --no-interactive
+        fi
         npx cap sync android
 
     - name: Grant execute permission for gradlew
