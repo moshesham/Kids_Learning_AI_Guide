@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { User, SessionSummaryData, ReadingPracticeExercise, WordStatus } from '../types';
 import { generateEnglishExercise } from '../services/geminiService';
 import MicIcon from './icons/MicIcon';
+import ReadAloudButton from './ReadAloudButton';
 
 const QUESTIONS_PER_SESSION = 5;
 
@@ -340,8 +341,9 @@ const ReadingView: React.FC<ReadingViewProps> = ({ user, initialProgress, onBack
             {!isLoading && !error && exercise && (
                 <>
                     {exercise.story_context && (
-                        <div className="text-left text-lg md:text-xl text-indigo-800 mb-6 leading-relaxed bg-indigo-50 p-6 rounded-xl border-l-4 border-indigo-500 font-serif italic shadow-sm">
-                            {exercise.story_context}
+                        <div className="text-left text-lg md:text-xl text-indigo-800 mb-6 leading-relaxed bg-indigo-50 p-6 rounded-xl border-l-4 border-indigo-500 font-serif italic shadow-sm flex items-start gap-3">
+                            <div className="flex-1">{exercise.story_context}</div>
+                            <ReadAloudButton text={exercise.story_context} user={user} className="mt-1" />
                         </div>
                     )}
                     <div className="text-3xl md:text-5xl font-medium text-slate-800 mb-8 p-8 bg-slate-50 rounded-xl min-h-[160px] flex items-center justify-center flex-wrap shadow-inner border border-slate-100">

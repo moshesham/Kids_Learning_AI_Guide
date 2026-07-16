@@ -9,6 +9,8 @@ export interface User {
   difficultyLevel?: number; // 1-10
   storyMode?: boolean;
   dyslexiaFont?: boolean;
+  readAloudEnabled?: boolean;
+  readAloudSpeed?: number;
 }
 
 export interface Progress {

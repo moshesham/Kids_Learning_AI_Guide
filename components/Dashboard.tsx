@@ -45,6 +45,14 @@ const Dashboard: React.FC<DashboardProps> = ({ user, onSelectSubject, progress, 
     onUpdateUser({ ...user, dyslexiaFont: e.target.checked });
   };
 
+  const handleReadAloudToggle = (e: React.ChangeEvent<HTMLInputElement>) => {
+    onUpdateUser({ ...user, readAloudEnabled: e.target.checked });
+  };
+
+  const handleReadAloudSpeedChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    onUpdateUser({ ...user, readAloudSpeed: parseFloat(e.target.value) });
+  };
+
   const chartData = [
     { name: 'Math', score: progress.math || 0, color: '#3b82f6' }, // blue-500
     { name: 'English', score: progress.english || 0, color: '#22c55e' }, // green-500
@@ -75,60 +83,101 @@ const Dashboard: React.FC<DashboardProps> = ({ user, onSelectSubject, progress, 
         </button>
       </div>
 
-      <div className="bg-white p-6 rounded-2xl shadow-md mb-12 flex flex-col md:flex-row items-center justify-between gap-6 border border-slate-100">
-        <div className="flex-1 w-full relative">
-          <label htmlFor="dash-difficulty" className="block text-left font-bold text-slate-700 mb-2">
-            Difficulty Level: <span className="text-blue-600">{user.difficultyLevel || 5}</span>
-            {sliderFeedback && (
-              <span className="ml-3 text-sm font-semibold text-blue-500 animate-fade-in bg-blue-50 px-2 py-1 rounded-md">
-                {sliderFeedback}
-              </span>
-            )}
-          </label>
-          <input
-            id="dash-difficulty"
-            type="range"
-            min="1"
-            max="10"
-            value={user.difficultyLevel || 5}
-            onChange={handleDifficultyChange}
-            className="w-full accent-blue-600"
-          />
-          <div className="flex justify-between text-xs text-slate-400 mt-1 font-medium">
-            <span>Easy</span>
-            <span>Advanced</span>
-          </div>
-        </div>
-        <div className="h-12 w-px bg-slate-200 hidden md:block"></div>
-        <div className="flex items-center gap-3">
-          <label htmlFor="dash-story" className="font-bold text-slate-700 cursor-pointer">Story Mode</label>
-          <div className="relative inline-block w-12 mr-2 align-middle select-none transition duration-200 ease-in">
-            <input 
-              type="checkbox" 
-              name="toggle" 
-              id="dash-story" 
-              checked={user.storyMode !== false}
-              onChange={handleStoryModeToggle}
-              className="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer transition-transform duration-200 ease-in-out checked:translate-x-6 checked:border-blue-600 border-slate-300"
+      <div className="bg-white p-6 rounded-2xl shadow-md mb-12 flex flex-col items-stretch gap-6 border border-slate-100">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-6 w-full">
+          <div className="flex-1 w-full relative">
+            <label htmlFor="dash-difficulty" className="block text-left font-bold text-slate-700 mb-2">
+              Difficulty Level: <span className="text-blue-600">{user.difficultyLevel || 5}</span>
+              {sliderFeedback && (
+                <span className="ml-3 text-sm font-semibold text-blue-500 animate-fade-in bg-blue-50 px-2 py-1 rounded-md">
+                  {sliderFeedback}
+                </span>
+              )}
+            </label>
+            <input
+              id="dash-difficulty"
+              type="range"
+              min="1"
+              max="10"
+              value={user.difficultyLevel || 5}
+              onChange={handleDifficultyChange}
+              className="w-full accent-blue-600"
             />
-            <label htmlFor="dash-story" className={`toggle-label block overflow-hidden h-6 rounded-full cursor-pointer transition-colors duration-200 ease-in-out ${user.storyMode !== false ? 'bg-blue-600' : 'bg-slate-300'}`}></label>
+            <div className="flex justify-between text-xs text-slate-400 mt-1 font-medium">
+              <span>Easy</span>
+              <span>Advanced</span>
+            </div>
+          </div>
+          
+          <div className="flex flex-wrap gap-6 items-center justify-center">
+            <div className="flex items-center gap-3">
+              <label htmlFor="dash-story" className="font-bold text-slate-700 cursor-pointer">Story Mode</label>
+              <div className="relative inline-block w-12 mr-2 align-middle select-none transition duration-200 ease-in">
+                <input 
+                  type="checkbox" 
+                  name="toggle" 
+                  id="dash-story" 
+                  checked={user.storyMode !== false}
+                  onChange={handleStoryModeToggle}
+                  className="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer transition-transform duration-200 ease-in-out checked:translate-x-6 checked:border-blue-600 border-slate-300"
+                />
+                <label htmlFor="dash-story" className={`toggle-label block overflow-hidden h-6 rounded-full cursor-pointer transition-colors duration-200 ease-in-out ${user.storyMode !== false ? 'bg-blue-600' : 'bg-slate-300'}`}></label>
+              </div>
+            </div>
+            <div className="h-8 w-px bg-slate-200 hidden md:block"></div>
+            <div className="flex items-center gap-3">
+              <label htmlFor="dash-dyslexia" className="font-bold text-slate-700 cursor-pointer">Dyslexia Font</label>
+              <div className="relative inline-block w-12 mr-2 align-middle select-none transition duration-200 ease-in">
+                <input 
+                  type="checkbox" 
+                  name="toggle-dyslexia" 
+                  id="dash-dyslexia" 
+                  checked={user.dyslexiaFont === true}
+                  onChange={handleDyslexiaFontToggle}
+                  className="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer transition-transform duration-200 ease-in-out checked:translate-x-6 checked:border-blue-600 border-slate-300"
+                />
+                <label htmlFor="dash-dyslexia" className={`toggle-label block overflow-hidden h-6 rounded-full cursor-pointer transition-colors duration-200 ease-in-out ${user.dyslexiaFont === true ? 'bg-blue-600' : 'bg-slate-300'}`}></label>
+              </div>
+            </div>
+             <div className="h-8 w-px bg-slate-200 hidden md:block"></div>
+            <div className="flex items-center gap-3">
+              <label htmlFor="dash-readaloud" className="font-bold text-slate-700 cursor-pointer">Read Aloud</label>
+              <div className="relative inline-block w-12 mr-2 align-middle select-none transition duration-200 ease-in">
+                <input 
+                  type="checkbox" 
+                  name="toggle-readaloud" 
+                  id="dash-readaloud" 
+                  checked={user.readAloudEnabled === true}
+                  onChange={handleReadAloudToggle}
+                  className="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer transition-transform duration-200 ease-in-out checked:translate-x-6 checked:border-blue-600 border-slate-300"
+                />
+                <label htmlFor="dash-readaloud" className={`toggle-label block overflow-hidden h-6 rounded-full cursor-pointer transition-colors duration-200 ease-in-out ${user.readAloudEnabled === true ? 'bg-blue-600' : 'bg-slate-300'}`}></label>
+              </div>
+            </div>
           </div>
         </div>
-        <div className="h-12 w-px bg-slate-200 hidden md:block"></div>
-        <div className="flex items-center gap-3">
-          <label htmlFor="dash-dyslexia" className="font-bold text-slate-700 cursor-pointer">Dyslexia Font</label>
-          <div className="relative inline-block w-12 mr-2 align-middle select-none transition duration-200 ease-in">
-            <input 
-              type="checkbox" 
-              name="toggle-dyslexia" 
-              id="dash-dyslexia" 
-              checked={user.dyslexiaFont === true}
-              onChange={handleDyslexiaFontToggle}
-              className="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer transition-transform duration-200 ease-in-out checked:translate-x-6 checked:border-blue-600 border-slate-300"
-            />
-            <label htmlFor="dash-dyslexia" className={`toggle-label block overflow-hidden h-6 rounded-full cursor-pointer transition-colors duration-200 ease-in-out ${user.dyslexiaFont === true ? 'bg-blue-600' : 'bg-slate-300'}`}></label>
+        
+        {user.readAloudEnabled && (
+          <div className="w-full bg-slate-50 p-4 rounded-xl border border-slate-200 flex flex-col md:flex-row items-center gap-4">
+             <label htmlFor="dash-readspeed" className="font-bold text-slate-700 whitespace-nowrap">
+                Reading Speed: <span className="text-blue-600">{user.readAloudSpeed || 1}x</span>
+              </label>
+              <div className="flex-1 w-full max-w-md flex items-center gap-3">
+                <span className="text-sm text-slate-500">Slow</span>
+                <input
+                  id="dash-readspeed"
+                  type="range"
+                  min="0.5"
+                  max="2"
+                  step="0.1"
+                  value={user.readAloudSpeed || 1}
+                  onChange={handleReadAloudSpeedChange}
+                  className="w-full accent-blue-600"
+                />
+                <span className="text-sm text-slate-500">Fast</span>
+              </div>
           </div>
-        </div>
+        )}
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

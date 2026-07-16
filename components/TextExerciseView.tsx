@@ -4,6 +4,7 @@ import { User, Exercise, Feedback, Subject, MathCategory, EnglishCategory, Hebre
 import { getFeedbackForAnswer } from '../services/geminiService';
 import AiFeedback from './AiFeedback';
 import MathVisualization from './MathVisualization';
+import ReadAloudButton from './ReadAloudButton';
 
 const QUESTIONS_PER_SESSION = 5;
 
@@ -252,49 +253,62 @@ const TextExerciseView: React.FC<TextExerciseViewProps> = ({
                         </div>
                     </div>
                 )}
-                <div className="bg-blue-50 p-4 rounded-xl border border-blue-200">
-                    <div className="text-xs font-bold text-blue-800 uppercase tracking-wider mb-1">Scenario</div>
-                    <div className="text-slate-700 font-medium">{social.scenario}</div>
+                <div className="bg-blue-50 p-4 rounded-xl border border-blue-200 flex items-start gap-3">
+                    <div className="flex-1">
+                      <div className="text-xs font-bold text-blue-800 uppercase tracking-wider mb-1">Scenario</div>
+                      <div className="text-slate-700 font-medium">{social.scenario}</div>
+                    </div>
+                    <ReadAloudButton text={social.scenario} user={user} className="mt-1" />
                 </div>
                 
                 {social.bodySignals && (
                     <div className="bg-purple-50 p-3 rounded-xl border border-purple-200 flex gap-3 items-start">
                         <span className="text-xl">👀</span>
-                        <div>
+                        <div className="flex-1">
                             <div className="text-xs font-bold text-purple-800 uppercase tracking-wider mb-1">Body Signals</div>
                             <div className="text-sm text-slate-700">{social.bodySignals}</div>
                         </div>
+                        <ReadAloudButton text={social.bodySignals} user={user} className="mt-1" />
                     </div>
                 )}
 
                 {social.emotionalRegulationHint && (
                     <div className="bg-green-50 p-3 rounded-xl border border-green-200 flex gap-3 items-start">
                         <span className="text-xl">🧘</span>
-                        <div>
+                        <div className="flex-1">
                             <div className="text-xs font-bold text-green-800 uppercase tracking-wider mb-1">Stay Calm</div>
                             <div className="text-sm text-slate-700">{social.emotionalRegulationHint}</div>
                         </div>
+                        <ReadAloudButton text={social.emotionalRegulationHint} user={user} className="mt-1" />
                     </div>
                 )}
 
                 {social.conflictResolutionHint && (
                     <div className="bg-yellow-50 p-3 rounded-xl border border-yellow-200 flex gap-3 items-start">
                         <span className="text-xl">🤝</span>
-                        <div>
+                        <div className="flex-1">
                             <div className="text-xs font-bold text-yellow-800 uppercase tracking-wider mb-1">Solve the Problem</div>
                             <div className="text-sm text-slate-700">{social.conflictResolutionHint}</div>
                         </div>
+                        <ReadAloudButton text={social.conflictResolutionHint} user={user} className="mt-1" />
                     </div>
                 )}
 
-                <div className="mt-4 space-y-3">
+                <div className="mt-4 space-y-3 flex flex-col">
                     {social.dialogue.map((line, i) => (
                         <div 
                             key={i}
-                            className={`p-4 rounded-2xl max-w-[80%] ${line.speaker === 'You' ? 'bg-blue-600 text-white self-end rounded-tr-none ml-auto' : 'bg-slate-100 text-slate-800 self-start rounded-tl-none mr-auto'}`}
+                            className={`p-4 rounded-2xl max-w-[80%] flex items-start gap-2 ${line.speaker === 'You' ? 'bg-blue-600 text-white self-end rounded-tr-none ml-auto' : 'bg-slate-100 text-slate-800 self-start rounded-tl-none mr-auto'}`}
                         >
-                            <div className={`text-[10px] uppercase opacity-60 mb-1 ${line.speaker === 'You' ? 'text-blue-200' : 'text-slate-500'}`}>{line.speaker}</div>
-                            <div className="text-lg font-medium">{line.text}</div>
+                            <div className="flex-1">
+                                <div className={`text-[10px] uppercase opacity-60 mb-1 ${line.speaker === 'You' ? 'text-blue-200' : 'text-slate-500'}`}>{line.speaker}</div>
+                                <div className="text-lg font-medium">{line.text}</div>
+                            </div>
+                            <ReadAloudButton 
+                                text={line.text} 
+                                user={user} 
+                                className={line.speaker === 'You' ? 'text-blue-200 hover:text-white hover:bg-blue-500' : ''} 
+                            />
                         </div>
                     ))}
                 </div>
@@ -332,21 +346,25 @@ const TextExerciseView: React.FC<TextExerciseViewProps> = ({
       return (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4" dir={subject === 'hebrew' ? 'rtl' : 'ltr'}>
           {exercise.options.map((option, index) => (
-            <button
-              key={index}
-              type="button"
-              onClick={() => {
-                if (!feedback) setUserAnswer(String(option));
-              }}
-              className={`p-4 rounded-lg text-lg transition-colors border-2 ${
-                userAnswer === String(option)
-                  ? 'bg-blue-500 text-white border-blue-700'
-                  : 'bg-white hover:bg-blue-100 border-slate-300'
-              } ${feedback ? 'cursor-not-allowed' : ''}`}
-              disabled={!!feedback}
-            >
-              {option}
-            </button>
+            <div key={index} className="flex gap-2 w-full">
+              <button
+                type="button"
+                onClick={() => {
+                  if (!feedback) setUserAnswer(String(option));
+                }}
+                className={`flex-1 p-4 rounded-lg text-lg transition-colors border-2 ${
+                  userAnswer === String(option)
+                    ? 'bg-blue-500 text-white border-blue-700'
+                    : 'bg-white hover:bg-blue-100 border-slate-300'
+                } ${feedback ? 'cursor-not-allowed' : ''}`}
+                disabled={!!feedback}
+              >
+                {option}
+              </button>
+              <div className="flex items-center justify-center">
+                <ReadAloudButton text={String(option)} user={user} />
+              </div>
+            </div>
           ))}
         </div>
       );
@@ -401,8 +419,9 @@ const TextExerciseView: React.FC<TextExerciseViewProps> = ({
       {!isLoading && !error && exercise && (
         <form onSubmit={handleSubmit}>
           {storyContext && (
-            <div className="text-left text-lg md:text-xl text-indigo-800 mb-6 leading-relaxed bg-indigo-50 p-6 rounded-xl border-l-4 border-indigo-500 font-serif italic shadow-sm">
-                {storyContext}
+            <div className="text-left text-lg md:text-xl text-indigo-800 mb-6 leading-relaxed bg-indigo-50 p-6 rounded-xl border-l-4 border-indigo-500 font-serif italic shadow-sm flex items-start gap-3">
+                <div className="flex-1">{storyContext}</div>
+                <ReadAloudButton text={storyContext} user={user} className="mt-1" />
             </div>
           )}
           {storyOrPassage && (
@@ -433,13 +452,16 @@ const TextExerciseView: React.FC<TextExerciseViewProps> = ({
           
           {/* FIX: Add a type guard to ensure exercise has a question before rendering it. */}
           {'question' in exercise && (
-            <h2 
-              className="text-2xl md:text-3xl font-semibold text-slate-800 mb-6" 
-              style={{ whiteSpace: 'pre-wrap' }}
-              dir={subject === 'hebrew' ? 'rtl' : 'ltr'}
-            >
-              {exercise.question}
-            </h2>
+            <div className="flex items-center justify-center gap-3 mb-6">
+              <h2 
+                className="text-2xl md:text-3xl font-semibold text-slate-800 m-0" 
+                style={{ whiteSpace: 'pre-wrap' }}
+                dir={subject === 'hebrew' ? 'rtl' : 'ltr'}
+              >
+                {exercise.question}
+              </h2>
+              <ReadAloudButton text={exercise.question} user={user} />
+            </div>
           )}
 
           {renderExerciseContent()}
@@ -462,7 +484,7 @@ const TextExerciseView: React.FC<TextExerciseViewProps> = ({
 
       {feedback && (
         <div className="mt-6 flex flex-col items-center gap-4">
-            <AiFeedback feedback={feedback} />
+            <AiFeedback feedback={feedback} user={user} />
             <button
                 type="button"
                 onClick={handleNextQuestion}
