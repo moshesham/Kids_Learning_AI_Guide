@@ -29,7 +29,7 @@ const HebrewCategorySelection: React.FC<HebrewCategorySelectionProps> = ({ user,
       </button>
       <h1 className="text-4xl md:text-5xl font-bold text-blue-600 mb-4">Hebrew Topics</h1>
       <p className="text-lg text-slate-600 mb-12">What would you like to practice today, {user.name}?</p>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-2xl mx-auto">
+      <div className="category-selection grid grid-cols-1 md:grid-cols-2 gap-8 max-w-2xl mx-auto">
         {categories.map(({ cat, title, desc, icon, color }) => (
             <SubjectCard 
                 key={cat}

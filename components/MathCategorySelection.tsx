@@ -66,7 +66,7 @@ const MathCategorySelection: React.FC<MathCategorySelectionProps> = ({ user, onS
       </button>
       <h1 className="text-4xl md:text-5xl font-bold text-blue-600 mb-4">Math Topics</h1>
       <p className="text-lg text-slate-600 mb-12">What would you like to practice today, {user.name}?</p>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div className="category-selection grid grid-cols-1 md:grid-cols-3 gap-8">
         {availableCategories.map(({ cat, title, desc, icon, color }) => (
             <SubjectCard 
                 key={cat}

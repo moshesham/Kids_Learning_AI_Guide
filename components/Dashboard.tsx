@@ -83,7 +83,7 @@ const Dashboard: React.FC<DashboardProps> = ({ user, onSelectSubject, progress, 
         </button>
       </div>
 
-      <div className="bg-white p-6 rounded-2xl shadow-md mb-12 flex flex-col items-stretch gap-6 border border-slate-100">
+      <div className="dashboard-settings bg-white p-6 rounded-2xl shadow-md mb-12 flex flex-col items-stretch gap-6 border border-slate-100">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6 w-full">
           <div className="flex-1 w-full relative">
             <label htmlFor="dash-difficulty" className="block text-left font-bold text-slate-700 mb-2">
@@ -180,7 +180,7 @@ const Dashboard: React.FC<DashboardProps> = ({ user, onSelectSubject, progress, 
         )}
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div className="subject-cards grid grid-cols-1 md:grid-cols-3 gap-8">
         <SubjectCard
           subject="math"
           title="Math"
@@ -210,7 +210,7 @@ const Dashboard: React.FC<DashboardProps> = ({ user, onSelectSubject, progress, 
         />
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-12">
+      <div className="progress-section grid grid-cols-1 lg:grid-cols-2 gap-8 mt-12">
         <div className="bg-white p-6 rounded-2xl shadow-md border border-slate-100 flex flex-col">
           <h2 className="text-2xl font-bold text-slate-700 mb-6 text-left">Your Progress</h2>
           <div className="flex-1 w-full min-h-[250px]">

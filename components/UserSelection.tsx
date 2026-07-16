@@ -36,7 +36,7 @@ const UserSelection: React.FC<UserSelectionProps> = ({ users, onSelectUser, onAd
   };
 
   return (
-    <div className="bg-white p-8 rounded-2xl shadow-2xl max-w-3xl mx-auto text-center">
+    <div className="user-selection-container bg-white p-8 rounded-2xl shadow-2xl max-w-3xl mx-auto text-center">
       <h1 className="text-4xl md:text-5xl font-bold text-blue-600 mb-4">Who is learning today?</h1>
       <p className="text-lg text-slate-600 mb-12">Please select your profile to continue.</p>
       
@@ -62,7 +62,7 @@ const UserSelection: React.FC<UserSelectionProps> = ({ users, onSelectUser, onAd
 
         <div 
             onClick={() => setShowAddForm(true)}
-            className="p-4 flex flex-col items-center justify-center rounded-2xl shadow-lg cursor-pointer transition-transform transform hover:-translate-y-2 bg-green-100 hover:bg-green-200 border-b-4 border-green-300 hover:border-green-500"
+            className="add-user-btn p-4 flex flex-col items-center justify-center rounded-2xl shadow-lg cursor-pointer transition-transform transform hover:-translate-y-2 bg-green-100 hover:bg-green-200 border-b-4 border-green-300 hover:border-green-500"
         >
             <div className="w-20 h-20 mb-3 flex items-center justify-center rounded-full bg-white shadow-md">
                 <AddUserIcon />

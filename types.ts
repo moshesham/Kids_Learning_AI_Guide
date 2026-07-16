@@ -148,7 +148,7 @@ export interface SessionSummaryData {
     correct: number;
     incorrect: number;
     subject: Subject;
-    category?: MathCategory | EnglishCategory;
+    category?: MathCategory | EnglishCategory | HebrewCategory;
     wpm?: number;
     accuracy?: number;
 }

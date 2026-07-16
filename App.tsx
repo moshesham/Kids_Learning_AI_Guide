@@ -4,6 +4,7 @@ import UserSelection from './components/UserSelection';
 import Dashboard from './components/Dashboard';
 import SubjectView from './components/SubjectView';
 import SessionSummary from './components/SessionSummary';
+import Walkthrough, { AppView } from './components/Walkthrough';
 
 const App: React.FC = () => {
   const [users, setUsers] = useState<User[]>([]);
@@ -11,6 +12,7 @@ const App: React.FC = () => {
   const [currentSubject, setCurrentSubject] = useState<Subject | null>(null);
   const [progress, setProgress] = useState<Record<string, Progress>>({});
   const [sessionSummary, setSessionSummary] = useState<SessionSummaryData | null>(null);
+  const [runTour, setRunTour] = useState(false);
 
   // Load state from localStorage on mount
   useEffect(() => {
@@ -88,6 +90,14 @@ const App: React.FC = () => {
       }
   };
 
+  const currentAppView: AppView = !currentUser 
+    ? 'user-selection' 
+    : sessionSummary 
+      ? 'session-summary' 
+      : currentSubject 
+        ? 'subject-view' 
+        : 'dashboard';
+
   const renderContent = () => {
     if (!currentUser) {
       return <UserSelection users={users} onSelectUser={handleSelectUser} onAddUser={handleAddUser} />;
@@ -122,8 +132,16 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className={`bg-slate-50 min-h-screen flex items-center justify-center p-4 ${currentUser?.dyslexiaFont ? 'font-lexend' : 'font-sans'}`}>
-      <main className="container mx-auto">
+    <div className={`bg-slate-50 min-h-screen flex flex-col relative ${currentUser?.dyslexiaFont ? 'font-lexend' : 'font-sans'}`}>
+      <button 
+        onClick={() => setRunTour(true)} 
+        className="absolute top-4 right-4 bg-blue-100 hover:bg-blue-200 text-blue-700 px-4 py-2 rounded-full font-bold shadow-sm z-50 flex items-center gap-2 transition-colors"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+        Walkthrough
+      </button>
+      <Walkthrough run={runTour} onFinish={() => setRunTour(false)} view={currentAppView} />
+      <main className="container mx-auto flex-1 flex items-center justify-center p-4">
         {renderContent()}
       </main>
     </div>

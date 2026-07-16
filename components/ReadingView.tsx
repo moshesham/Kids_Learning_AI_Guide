@@ -320,7 +320,7 @@ const ReadingView: React.FC<ReadingViewProps> = ({ user, initialProgress, onBack
     const results = sessionWords.length === questionCount + 1 ? sessionWords[questionCount] : null;
 
     return (
-        <div className="bg-white p-6 md:p-8 rounded-2xl shadow-2xl max-w-4xl mx-auto text-center relative">
+        <div className="exercise-container bg-white p-6 md:p-8 rounded-2xl shadow-2xl max-w-4xl mx-auto text-center relative">
             <button onClick={onBack} className="absolute top-4 left-4 text-sm text-slate-500 hover:text-blue-600 transition-colors">&larr; Back</button>
             <div className="mb-4">
                 <div className="w-full bg-gray-200 rounded-full h-2.5">

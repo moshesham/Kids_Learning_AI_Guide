@@ -33,7 +33,7 @@ const SessionSummary: React.FC<SessionSummaryProps> = ({ summary, onBack }) => {
   const isReadingPractice = wpm !== undefined && accuracy !== undefined;
 
   return (
-    <div className="bg-white p-8 rounded-2xl shadow-2xl max-w-2xl mx-auto text-center">
+    <div className="session-summary-container bg-white p-8 rounded-2xl shadow-2xl max-w-2xl mx-auto text-center">
       <h1 className="text-4xl md:text-5xl font-bold text-blue-600 mb-4">Session Complete!</h1>
       <p className="text-lg text-slate-600 mb-8">You finished your {subjectTitles[subject]} practice.</p>
       
@@ -72,7 +72,7 @@ const SessionSummary: React.FC<SessionSummaryProps> = ({ summary, onBack }) => {
       
       <button 
         onClick={onBack}
-        className="w-full max-w-xs mx-auto bg-blue-600 text-white font-bold py-3 px-6 rounded-lg text-xl hover:bg-blue-700 transition-colors"
+        className="back-to-dashboard-btn w-full max-w-xs mx-auto bg-blue-600 text-white font-bold py-3 px-6 rounded-lg text-xl hover:bg-blue-700 transition-colors"
       >
         Back to Dashboard
       </button>

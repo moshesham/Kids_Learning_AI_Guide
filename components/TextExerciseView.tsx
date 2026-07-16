@@ -11,7 +11,7 @@ const QUESTIONS_PER_SESSION = 5;
 interface TextExerciseViewProps {
   user: User;
   subject: Subject;
-  category?: MathCategory | EnglishCategory;
+  category?: MathCategory | EnglishCategory | HebrewCategory;
   onBack: () => void;
   onSessionComplete: (summary: SessionSummaryData, newProgress: number) => void;
   onUpdateUser: (user: User) => void;
@@ -392,7 +392,7 @@ const TextExerciseView: React.FC<TextExerciseViewProps> = ({
     : null;
 
   return (
-    <div className="bg-white p-6 md:p-8 rounded-2xl shadow-2xl max-w-4xl mx-auto text-center relative">
+    <div className="exercise-container bg-white p-6 md:p-8 rounded-2xl shadow-2xl max-w-4xl mx-auto text-center relative">
        <button 
         onClick={onBack}
         className="absolute top-4 left-4 text-sm text-slate-500 hover:text-blue-600 transition-colors"
