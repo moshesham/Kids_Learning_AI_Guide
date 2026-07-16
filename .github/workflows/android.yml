@@ -13,23 +13,23 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - name: Set up Node.js
-      uses: actions/setup-node@v4
+    - name: Set up Bun
+      uses: oven-sh/setup-bun@v2
       with:
-        node-version: 20
-        cache: npm
+        bun-version: latest
 
     - name: Install dependencies
-      run: npm install
+      run: bun install --frozen-lockfile
 
     - name: Build web app
-      run: npm run build
+      run: bun run build
 
     - name: Set up Java
       uses: actions/setup-java@v4
       with:
         java-version: '17'
         distribution: 'temurin'
+        cache: gradle
 
     - name: Set up Android SDK
       uses: android-actions/setup-android@v3
