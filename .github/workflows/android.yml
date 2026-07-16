@@ -34,9 +34,6 @@ jobs:
     - name: Set up Android SDK
       uses: android-actions/setup-android@v3
 
-    - name: Install Capacitor tooling
-      run: npm install --no-save @capacitor/core @capacitor/cli @capacitor/android
-
     - name: Create Capacitor config
       run: |
         cat > capacitor.config.ts <<'EOF'
@@ -53,7 +50,9 @@ jobs:
 
     - name: Sync Android project
       run: |
-        npx cap add android --no-interactive || true
+        if [ ! -d android ]; then
+          npx cap add android --no-interactive
+        fi
         npx cap sync android
 
     - name: Grant execute permission for gradlew
